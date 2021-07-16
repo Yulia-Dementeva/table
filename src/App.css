@@ -1,15 +1,24 @@
+* {
+    margin: 0;
+}
+
 body {
     height: 100%;
-    margin: 0;
+    min-width:900px;
+}
+html {
+    position:relative;
+    min-height:100%;
 }
 
 .wrapper {
     display: flex;
     flex-direction: column;
+    min-height: 100%;
+
 }
 
 .header {
-    order: 2;
     background-color: #F2F3F4;
     width: 100%;
     height: 128px;
@@ -17,10 +26,27 @@ body {
     top: 0px;
 }
 
+.main {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-bottom: 128px;
+    min-height: 100%;
+}
+
+.footer {
+    background: #D4D5D6;
+    height: 128px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+
+
+
 .headerTitle {
     text-align: center;
-    width: 100%;
-    height: 44px;
     padding-top: 42px;
 
     font-family: Citymobil_v0-2;
@@ -31,25 +57,20 @@ body {
     color: #707070;
 }
 
-.center {
-    display: flex;
-    flex-direction: row;
-    order: 3;
-    height: 100%;
-}
+
 .sidebar {
     width: 224px;
     left: 0%;
-    right: 84.44%;
-    top: 128px;
-    bottom: 11.81%;
+    max-height: calc(100% - 128px);
     background: #E4E5E6;
-    mix-blend-mode: normal;
     box-shadow: inset 0px -1px 0px rgba(150, 150, 150, 0.25);
+    position: absolute;
+    top: 128px;
+    bottom: 0;
+
 }
 
 .sidebarTitle {
-    height: 100%;
     text-align: center;
     padding-top: 200px;
 
@@ -61,35 +82,17 @@ body {
     color: #707070;
 }
 
-.main {
-    left: 15.56%;
-    width: 84.44%;
-    top: 128px;
-    bottom: 11.81%;
+.center {
+    margin-left: 224px;
+    width: calc(100% - 224px);
     padding: 10px;
 }
 
 
-.footer {
-   order: 4;
-    left: 0%;
-    right: 0%;
-    bottom: 0px;
-    background: #D4D5D6;
-    mix-blend-mode: normal;
-    height: 128px;
-    width: 100%;
-    /*position: fixed;*/
-
-}
 
 .footerTitle {
     text-align: center;
-    width: 100%;
-    height: 44px;
-
-    top: 42px;
-    bottom: 42px;
+    padding-top: 42px;
 
     font-family: Citymobil_v0-2;
     font-style: normal;

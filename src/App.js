@@ -10,7 +10,7 @@ class App extends Component {
 
 
     state = {
-        isLoading: false,
+        isLoading: true,
         data: {
             "cars": [{
                 "mark": "Acura",
@@ -19,7 +19,7 @@ class App extends Component {
             }]
         },
         sort: 'asc',
-        sortField: 'mark',
+        sortField: ['mark', 'model'],
         row: null,
         search: null
     }
@@ -60,8 +60,11 @@ class App extends Component {
         }
 
         let result = data.cars.filter(item => {
+
             return (
-                item["mark"].toLowerCase().includes(search.toLowerCase())
+                item["mark"].toLowerCase().includes(search.toLowerCase()) ||
+                item["model"].toLowerCase().includes(search.toLowerCase()) ||
+                (item["mark"] + ' ' + item["model"]).toLowerCase().includes(search.toLowerCase())
             );
         });
         if (result.length) {
@@ -87,11 +90,11 @@ class App extends Component {
                         <div className='headerTitle'> header</div>
                     </div>
 
-                    <div className='center'>
+                    <main className='main'>
                         <div className='sidebar'>
                             <div className='sidebarTitle'> sidebar</div>
                         </div>
-                        <div className='main'>
+                        <div className='center'>
                             {this.state.isLoading
                                 ? <Loader/>
                                 : <React.Fragment>
@@ -108,11 +111,11 @@ class App extends Component {
                             }
                             {this.state.row ? <DetailRowView car={this.state.row}/> : null}
                         </div>
-                    </div>
+                    </main>
 
-                    <div className='footer'>
+                    <footer className='footer'>
                         <div className='footerTitle'> footer</div>
-                    </div>
+                    </footer>
                 </div>
             </div>
         );

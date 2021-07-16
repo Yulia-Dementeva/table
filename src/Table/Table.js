@@ -19,7 +19,7 @@ const Table = (props) => {
 
             { props.data.cars.length === 0 ? <p> Нет результатов </p> : props.data.cars.map(item => (
                 <tr key={Math.random()} onClick={props.onRowSelect.bind(null, item)}>
-                    <td>{item.mark} {item.model}</td>
+                    <td>{item.mark } {item.model}</td>
                     <td>{item.tariffs['Эконом'] ? item.tariffs['Эконом'].year : '-'}</td>
                     <td>{item.tariffs['Комфорт'] ? item.tariffs['Комфорт'].year : '-'}</td>
                     <td>{item.tariffs['Комфорт+'] ? item.tariffs['Комфорт+'].year : '-'}</td>
