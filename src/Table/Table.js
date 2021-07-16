@@ -6,7 +6,10 @@ const Table = (props) => {
         <table className="table">
             <thead className="thead-light">
             <tr>
-                <th scope="col">Марка и модель (*)</th>
+                <th onClick={props.onSort.bind(null, "mark")} scope="col">
+                    Марка и модель
+                    {props.sortField === 'mark' ? <small>{props.sort}</small> : null}
+                </th>
                 <th scope="col">Эконом</th>
                 <th scope="col">Комфорт</th>
                 <th scope="col">Комфорт +</th>
@@ -16,9 +19,9 @@ const Table = (props) => {
             </thead>
             <tbody>
 
-            { props.cars.map(item => (
-                <tr key={Date.now() * 1000}>
-                    <td>{item.mark}</td>
+            {props.data.cars.map(item => (
+                <tr key={Math.random()}>
+                    <td>{item.mark} {item.model}</td>
                     <td>{item.tariffs['Эконом'] ? item.tariffs['Эконом'].year : '-'}</td>
                     <td>{item.tariffs['Комфорт'] ? item.tariffs['Комфорт'].year : '-'}</td>
                     <td>{item.tariffs['Комфорт+'] ? item.tariffs['Комфорт+'].year : '-'}</td>
@@ -27,27 +30,6 @@ const Table = (props) => {
 
                 </tr>
             )) }
-
-
-
-            {/*<tr>*/}
-            {/*    <th scope="row">1</th>*/}
-            {/*    <td>Mark</td>*/}
-            {/*    <td>Otto</td>*/}
-            {/*    <td>@mdo</td>*/}
-            {/*</tr>*/}
-            {/*<tr>*/}
-            {/*    <th scope="row">2</th>*/}
-            {/*    <td>Jacob</td>*/}
-            {/*    <td>Thornton</td>*/}
-            {/*    <td>@fat</td>*/}
-            {/*</tr>*/}
-            {/*<tr>*/}
-            {/*    <th scope="row">3</th>*/}
-            {/*    <td>Larry</td>*/}
-            {/*    <td>the Bird</td>*/}
-            {/*    <td>@twitter</td>*/}
-            {/*</tr>*/}
             </tbody>
         </table>
     )

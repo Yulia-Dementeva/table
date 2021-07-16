@@ -1,4 +1,5 @@
 import './App.css';
+import _ from 'lodash'
 import React, {Component} from "react";
 import Loader from "./Loader/Loader";
 import Table from "./Table/Table";
@@ -8,7 +9,9 @@ class App extends Component {
 
     state = {
         isLoading: false,
-        data: {"cars": [{"mark":"Acura","model":"ILX","tariffs":{"Комфорт":{"year":2015},"Стандарт":{"year":2014}}}]}
+        data: {"cars": [{"mark":"Acura","model":"ILX","tariffs":{"Комфорт":{"year":2015},"Стандарт":{"year":2014}}}]},
+        sort: 'asc',
+        sortField: 'mark'
     }
 
     async componentDidMount() {
@@ -20,9 +23,26 @@ class App extends Component {
         })
     }
 
+    onSort = (sortField) => {
+        console.log(this.state.data.cars)
+
+        const cloneData = this.state.data.cars.concat()
+        console.log(cloneData)
+        const sortType = this.state.sort === 'asc' ? 'desc' : 'asc';
+        const orderedData = {cars: _.orderBy(cloneData, sortField, sortType)};
+
+        console.log(orderedData)
+
+        this.setState({
+            data: orderedData,
+            sort: sortType,
+            sortField: sortField
+        })
+
+        console.log(this.state.data.cars)
+    }
 
     render() {
-
         return (
             <div className="App">
                 <div className='wrapper'>
@@ -37,10 +57,11 @@ class App extends Component {
                             {this.state.isLoading
                                 ? <Loader/>
                                 : <Table
-                                    cars={this.state.data.cars}
+                                    data={this.state.data}
+                                    onSort={this.onSort}
+                                    sort={this.state.sort}
+                                    sortField={this.state.sortField}
                                 />}
-
-
                         </div>
                     </div>
                     <footer className='footer'>
