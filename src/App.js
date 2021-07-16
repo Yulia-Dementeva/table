@@ -8,7 +8,6 @@ import TableSearch from "./TableSearch/TableSearch";
 
 class App extends Component {
 
-
     state = {
         isLoading: true,
         data: {
@@ -19,7 +18,7 @@ class App extends Component {
             }]
         },
         sort: 'asc',
-        sortField: ['mark', 'model'],
+        sortField:'mark',
         row: null,
         search: null
     }
