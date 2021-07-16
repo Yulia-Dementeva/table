@@ -3,15 +3,25 @@ import _ from 'lodash'
 import React, {Component} from "react";
 import Loader from "./Loader/Loader";
 import Table from "./Table/Table";
+import DetailRowView from "./DetailRowView/DetailRowView";
+import TableSearch from "./TableSearch/TableSearch";
 
 class App extends Component {
 
 
     state = {
         isLoading: false,
-        data: {"cars": [{"mark":"Acura","model":"ILX","tariffs":{"Комфорт":{"year":2015},"Стандарт":{"year":2014}}}]},
+        data: {
+            "cars": [{
+                "mark": "Acura",
+                "model": "ILX",
+                "tariffs": {"Комфорт": {"year": 2015}, "Стандарт": {"year": 2014}}
+            }]
+        },
         sort: 'asc',
-        sortField: 'mark'
+        sortField: 'mark',
+        row: null,
+        search: null
     }
 
     async componentDidMount() {
@@ -24,31 +34,59 @@ class App extends Component {
     }
 
     onSort = (sortField) => {
-        console.log(this.state.data.cars)
-
         const cloneData = this.state.data.cars.concat()
-        console.log(cloneData)
         const sortType = this.state.sort === 'asc' ? 'desc' : 'asc';
         const orderedData = {cars: _.orderBy(cloneData, sortField, sortType)};
-
-        console.log(orderedData)
-
         this.setState({
             data: orderedData,
             sort: sortType,
             sortField: sortField
         })
-
-        console.log(this.state.data.cars)
     }
 
+    onRowSelect = row => (
+        this.setState({row})
+    )
+
+    searchHandler = (search) => {
+        this.setState({search})
+    }
+
+    getFilteredData() {
+        const {data, search} = this.state
+
+        if (!search) {
+            return data
+        }
+
+        let result = data.cars.filter(item => {
+            return (
+                item["mark"].toLowerCase().includes(search.toLowerCase())
+            );
+        });
+        if (result.length) {
+            result = {cars: result}
+        }
+
+        if (result.length === 0) {
+            result = {cars: result}
+        }
+
+        return result
+    }
+
+
     render() {
+        const filteredData = this.getFilteredData();
+
         return (
             <div className="App">
                 <div className='wrapper'>
-                    <header className='header'>
+
+                    <div className='header'>
                         <div className='headerTitle'> header</div>
-                    </header>
+                    </div>
+
                     <div className='center'>
                         <div className='sidebar'>
                             <div className='sidebarTitle'> sidebar</div>
@@ -56,17 +94,25 @@ class App extends Component {
                         <div className='main'>
                             {this.state.isLoading
                                 ? <Loader/>
-                                : <Table
-                                    data={this.state.data}
-                                    onSort={this.onSort}
-                                    sort={this.state.sort}
-                                    sortField={this.state.sortField}
-                                />}
+                                : <React.Fragment>
+                                    <TableSearch onSearch={this.searchHandler}/>
+                                    <Table
+
+                                        data={filteredData}
+                                        onSort={this.onSort}
+                                        sort={this.state.sort}
+                                        sortField={this.state.sortField}
+                                        onRowSelect={this.onRowSelect}
+                                    />
+                                </React.Fragment>
+                            }
+                            {this.state.row ? <DetailRowView car={this.state.row}/> : null}
                         </div>
                     </div>
-                    <footer className='footer'>
+
+                    <div className='footer'>
                         <div className='footerTitle'> footer</div>
-                    </footer>
+                    </div>
                 </div>
             </div>
         );

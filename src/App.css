@@ -4,57 +4,24 @@ body {
 }
 
 .wrapper {
-    height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
 .header {
+    order: 2;
     background-color: #F2F3F4;
     width: 100%;
     height: 128px;
     left: 0px;
     top: 0px;
-    position: fixed;
 }
 
 .headerTitle {
-    position: absolute;
     text-align: center;
     width: 100%;
     height: 44px;
-
-    top: 42px;
-    bottom: 42px;
-
-    font-family: Citymobil_v0-2;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 36px;
-    line-height: 44px;
-    color: #707070;
-}
-
-footer {
-    position: fixed;
-    left: 0%;
-    right: 0%;
-    bottom: 0%;
-    background: #D4D5D6;
-    mix-blend-mode: normal;
-    height: 128px;
-    width: 100%;
-
-}
-
-.footerTitle {
-    position: absolute;
-    text-align: center;
-    width: 100%;
-    height: 44px;
-
-    top: 42px;
-    bottom: 42px;
+    padding-top: 42px;
 
     font-family: Citymobil_v0-2;
     font-style: normal;
@@ -67,9 +34,11 @@ footer {
 .center {
     display: flex;
     flex-direction: row;
+    order: 3;
+    height: 100%;
 }
 .sidebar {
-    position: fixed;
+    width: 224px;
     left: 0%;
     right: 84.44%;
     top: 128px;
@@ -80,10 +49,9 @@ footer {
 }
 
 .sidebarTitle {
-    position: relative;
-    height: 44px;
+    height: 100%;
     text-align: center;
-    top: 40%;
+    padding-top: 200px;
 
     font-family: Citymobil_v0-2;
     font-style: normal;
@@ -94,10 +62,39 @@ footer {
 }
 
 .main {
-position: absolute;
     left: 15.56%;
     width: 84.44%;
     top: 128px;
     bottom: 11.81%;
-/*background: darkolivegreen;*/
+    padding: 10px;
+}
+
+
+.footer {
+   order: 4;
+    left: 0%;
+    right: 0%;
+    bottom: 0px;
+    background: #D4D5D6;
+    mix-blend-mode: normal;
+    height: 128px;
+    width: 100%;
+    /*position: fixed;*/
+
+}
+
+.footerTitle {
+    text-align: center;
+    width: 100%;
+    height: 44px;
+
+    top: 42px;
+    bottom: 42px;
+
+    font-family: Citymobil_v0-2;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 36px;
+    line-height: 44px;
+    color: #707070;
 }

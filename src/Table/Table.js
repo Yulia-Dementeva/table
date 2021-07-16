@@ -1,14 +1,12 @@
 import React from "react";
 
 const Table = (props) => {
-    console.log(props)
-    return (
+ return (
         <table className="table">
             <thead className="thead-light">
             <tr>
                 <th onClick={props.onSort.bind(null, "mark")} scope="col">
-                    Марка и модель
-                    {props.sortField === 'mark' ? <small>{props.sort}</small> : null}
+                    Марка и модель {props.sortField === 'mark' ? <small>{props.sort}</small> : null}
                 </th>
                 <th scope="col">Эконом</th>
                 <th scope="col">Комфорт</th>
@@ -19,8 +17,8 @@ const Table = (props) => {
             </thead>
             <tbody>
 
-            {props.data.cars.map(item => (
-                <tr key={Math.random()}>
+            { props.data.cars.length === 0 ? <p> Нет результатов </p> : props.data.cars.map(item => (
+                <tr key={Math.random()} onClick={props.onRowSelect.bind(null, item)}>
                     <td>{item.mark} {item.model}</td>
                     <td>{item.tariffs['Эконом'] ? item.tariffs['Эконом'].year : '-'}</td>
                     <td>{item.tariffs['Комфорт'] ? item.tariffs['Комфорт'].year : '-'}</td>

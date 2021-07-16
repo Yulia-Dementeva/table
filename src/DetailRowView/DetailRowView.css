@@ -1,0 +1,8 @@
+.carInfo {
+    background: rgba(240, 242, 244, 0.5);
+    border: 1px solid #DEE5EB;
+    box-sizing: border-box;
+    padding: 15px;
+    box-shadow: inset -1px 0px 0px rgba(198, 209, 221, 0.5);
+
+}
